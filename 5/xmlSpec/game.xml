@@ -1,0 +1,88 @@
+<?xml version = "1.0"?>
+<GameData>
+<!-- screenTitle is also used to identify you and your animation. 
+     So make sure to include your name as part of the screenTitle -->
+<title>The Tracker Framework</title>
+<maxStringSize>50</maxStringSize>
+
+<frameCapOn>true</frameCapOn>
+<period>17</period>
+
+<maxFrames>300</maxFrames>
+<username>ckinzie</username>
+
+<numberOfStars>25</numberOfStars>
+
+<view>
+  <width>854</width>
+  <height>480</height>
+</view>
+
+<world>
+  <width>3200</width>
+  <height>1283</height>
+</world>
+
+<background>
+  <file>assets/Route102.bmp</file>
+  <factor>1</factor>
+  <transparency>false</transparency>
+</background>
+
+<font name="font">
+  <file>fonts/arial.ttf</file>
+  <size>24</size>
+  <red>255</red>
+  <green>0</green>
+  <blue>0</blue>
+  <alpha>0</alpha>
+</font>
+
+<HUD>
+  <width>220</width>
+  <height>100</height>
+</HUD>
+
+<Goomba>
+  <file>assets/goombaBigR.png</file>
+  <startLoc x="50" y="140"/>
+  <frames>7</frames>
+  <imageWidth>60</imageWidth>
+  <imageHeight>86</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>200</speedX>
+  <speedY>200</speedY>
+  <transparency>false</transparency>
+</Goomba>
+
+<GoombaR>
+  <file>assets/goombaBig.png</file>
+  <startLoc x="50" y="140"/>
+  <frames>7</frames>
+  <imageWidth>60</imageWidth>
+  <imageHeight>86</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>200</speedX>
+  <speedY>200</speedY>
+  <transparency>false</transparency>
+</GoombaR>
+
+<Star>
+  <file>assets/star.png</file>
+  <startLoc x="200" y="200"/>
+  <speedX>100</speedX>
+  <speedY>150</speedY>
+  <safeDistance>75</safeDistance>
+  <transparency>false</transparency>
+</Star>
+
+<Bullet>
+  <file>assets/bullet.png</file>
+  <startLoc x="200" y="200"/>
+  <speedX>100</speedX>
+  <speedY>150</speedY>
+  <safeDistance>75</safeDistance>
+  <transparency>false</transparency>
+</Bullet>
+
+</GameData>
