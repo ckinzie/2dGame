@@ -76,18 +76,24 @@ void Player::shoot() {
     Vector2f vel = getVelocity();
     float x = 0;
     float y = getY()+getScaledHeight()/4;
-    int minBulletSpeed = Gamedata::getInstance().getXmlInt("Bullet/speed");
+    int minBulletSpeed = Gamedata::getInstance().getXmlInt("Bullet/minSpeed");
     if (vel[0] >= 0) {
       x = getX()+getScaledWidth();
       vel[0] += minBulletSpeed;
     }
     else if (vel[0] < 0) {
       x = getX();
-    vel[0] -= minBulletSpeed;
+      vel[0] -= minBulletSpeed;
     }
-    bullets.shoot(Vector2f(x, y), vel);
+    //bullets.shoot(Vector2f(x, y), vel);
+    bullets.shoot(getPosition(), vel);
     timeSinceLastBullet = 0;
   }
+}
+
+void Player::draw() const{
+  MultiSprite2d::draw();
+  bullets.draw();
 }
 
 void Player::update(Uint32 ticks) {
@@ -97,6 +103,15 @@ void Player::update(Uint32 ticks) {
 
   Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
   setPosition(getPosition() + incr);
+
+  if (getY() < 0)
+    setVelocityY(std::abs(getVelocityY()));
+  if (getY() > worldHeight-getScaledHeight())
+    setVelocityY(-std::abs(getVelocityY()));
+  if (getX() < 0)
+    setVelocityX(std::abs(getVelocityX()));
+  if (getY() > worldHeight-getScaledHeight())
+    setVelocityX(-std::abs(getVelocityX()));
 
   std::list<SmartSprite*>::iterator ptr = observers.begin();
   while ( ptr != observers.end() ) {

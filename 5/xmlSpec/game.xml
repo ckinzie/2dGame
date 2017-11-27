@@ -77,17 +77,17 @@
 </Star>
 
 <Bullet>
-  <file>assets/star.png</file>
+  <file>assets/bullet.png</file>
   <frames>1</frames>
   <imageWidth>32</imageWidth>
   <imageHeight>32</imageHeight>
   <frameInterval>1</frameInterval>
   <speedX>0</speedX>
   <speedY>0</speedY>
-  <speed>100</speed>
+  <minSpeed>100</minSpeed>
   <distance>300</distance>
   <bulletInterval>200</bulletInterval>
-  <transparency>false</transparency>
+  <transparency>true</transparency>
 </Bullet>
 
 </GameData>

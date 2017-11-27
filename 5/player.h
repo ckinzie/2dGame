@@ -12,6 +12,7 @@ class Player : public MultiSprite2d {
 public:
   Player(const std::string&);
   Player(const Player&);
+  virtual void draw() const;
   virtual void update(Uint32 ticks);
 
   void collided() { collision = true; }
