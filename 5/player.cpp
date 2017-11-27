@@ -1,11 +1,13 @@
 #include "player.h"
+#include "gamedata.h"
 
 Player::Player( const std::string& name) :
   MultiSprite2d(name + "R", name),
   collision(false),
   initialVelocity(getVelocity()),
   observers(),
-  bullets(name)
+  bullets("Bullet"),
+  bulletInterval(Gamedata::getInstance().getXmlInt("Bullet/bulletInterval"))
 { }
 
 Player::Player(const Player& s) :
@@ -13,7 +15,8 @@ Player::Player(const Player& s) :
   collision(s.collision),
   initialVelocity(s.getVelocity()),
   observers(s.observers),
-  bullets(s.bullets)
+  bullets(s.bullets),
+  bulletInterval(s.bulletInterval)
 { }
 
 Player& Player::operator=(const Player& s) {
@@ -67,8 +70,29 @@ void Player::detach( SmartSprite* o ) {
   }
 }
 
+void Player::shoot() {
+  if (timeSinceLastBullet > bulletInterval) {
+    Vector2f vel = getVelocity();
+    float x = 0;
+    float y = getY()+getScaledHeight()/4;
+    int minBulletSpeed = Gamedata::getInstance().getXmlInt("Bullet/speed");
+    if (vel[0] > 0) {
+      x = getX()+getScaledWidth();
+      vel[0] += minBulletSpeed;
+    }
+    else if (vel[0] < 0) {
+      x = getX();
+    vel[0] -= minBulletSpeed;
+    }    
+    bullets.shoot(Vector2f(x, y), vel);
+    timeSinceLastBullet = 0;
+  }
+}
+
 void Player::update(Uint32 ticks) {
   if ( !collision ) advanceFrame(ticks);
+  timeSinceLastBullet += ticks;
+  bullets.update(ticks);
 
   Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
   setPosition(getPosition() + incr);

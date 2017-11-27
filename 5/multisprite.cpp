@@ -32,7 +32,7 @@ MultiSprite::MultiSprite(const std::string& name, const Vector2f& pos, const Vec
   images(frames),
   currentFrame(0),
   numberOfFrames(Gamedata::getInstance().getXmlInt(name+"/frames")),
-  frameInterval(Gamedata::getInstance().getXmlInt(name+"/frameSpeed")),
+  frameInterval(Gamedata::getInstance().getXmlInt(name+"/frameInterval")),
   timeSinceLastFrame(0),
   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
   worldHeight(Gamedata::getInstance().getXmlInt("world/height"))

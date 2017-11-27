@@ -35,5 +35,7 @@ private:
   Vector2f initialVelocity;
   std::list<SmartSprite*> observers;
   BulletPool bullets;
+  int timeSinceLastBullet;
+  int bulletInterval;
 };
 #endif

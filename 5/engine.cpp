@@ -37,7 +37,7 @@ Engine::Engine() :
   currentSprite(0),
   makeVideo( false )
 {
-  hud = new Hud(renderer, Gamedata::getInstance().getXmlInt("HUD/width"),Gamedata::getInstance().getXmlInt("HUD/height"));
+  hud = new Hud(renderer, Gamedata::getInstance().getXmlInt("HUD/width"),Gamedata::getInstance().getXmlInt("HUD/height"), player);
   int n = Gamedata::getInstance().getXmlInt("numberOfStars");
   sprites.reserve(n);
   Vector2f pos = player->getPosition();
@@ -153,6 +153,9 @@ void Engine::play() {
       }
       if (keystate[SDL_SCANCODE_S]) {
         player->down();
+      }
+      if (keystate[SDL_SCANCODE_SPACE]) {
+        player->shoot();
       }
       draw();
       update(ticks);

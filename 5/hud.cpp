@@ -1,8 +1,9 @@
 #include <SDL.h>
 #include "hud.h"
 #include "ioMod.h"
+#include <sstream>
 
-Hud::Hud(SDL_Renderer* r, int w, int h) : renderer(r), width(w), height(h){}
+Hud::Hud(SDL_Renderer* r, int w, int h, Player* p) : renderer(r), width(w), height(h), player(p){}
 
 void Hud::draw() const { 
   if(showHud) {
@@ -13,6 +14,12 @@ void Hud::draw() const {
     IOmod::getInstance().writeText("HUD:", 10, 10, {255,255,255,255});
     IOmod::getInstance().writeText("Use wasd to ", 10, 50, {255,255,255,255});
     IOmod::getInstance().writeText("move the goomba.", 10,70, {255,255,255,255});
+    std::ostringstream ss;
+    ss << "Bullet list: " << player->bulletCount();
+    IOmod::getInstance().writeText(ss.str(), 10,90, {255,255,255,255});
+    std::ostringstream ss2;
+    ss2 << "Free list: " << player->freeCount();
+    IOmod::getInstance().writeText(ss2.str(), 10,110, {255,255,255,255});
   }
 }
 

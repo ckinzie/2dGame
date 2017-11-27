@@ -78,10 +78,15 @@
 
 <Bullet>
   <file>assets/bullet.png</file>
-  <startLoc x="200" y="200"/>
+  <frames>1</frames>
+  <imageWidth>31</imageWidth>
+  <imageHeight>31</imageHeight>
+  <frameInterval>50</frameInterval>
   <speedX>100</speedX>
-  <speedY>150</speedY>
-  <safeDistance>75</safeDistance>
+  <speedY>0</speedY>
+  <speed>100</speed>
+  <distance>300</distance>
+  <bulletInterval>200</bulletInterval>
   <transparency>false</transparency>
 </Bullet>
 

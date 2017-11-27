@@ -7,7 +7,7 @@
 Bullet::Bullet(const string& name, const Vector2f& pos, const Vector2f& velocity) :
   MultiSprite(name, pos, velocity, ImageFactory::getInstance().getImages(name)),
   distance(0),
-  maxDistance(Gamedata::getInstance().getXmlInt(name+"/distance")),
+  maxDistance(Gamedata::getInstance().getXmlInt("Bullet/distance")),
   tooFar(false)
 {}
 
@@ -26,12 +26,12 @@ void Bullet::reset() {
 void Bullet::update(Uint32 ticks) {
   Vector2f pos = getPosition();
   MultiSprite::update(ticks);
-  /*if (getY() < 0 || getY() + getScaledHeight() > worldHeight ) {
+  if (getY() < 0 || getY() + getScaledHeight() > worldHeight ) {
      tooFar = true;
   }
   if (getX() < 0 || getX() > worldHeight ) {
      tooFar = true;
-  }*/
+  }
   distance += (hypot(getX()-pos[0], getY()-pos[1]));
   if(distance > maxDistance)
     tooFar = true;
