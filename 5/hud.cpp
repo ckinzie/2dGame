@@ -3,7 +3,7 @@
 #include "ioMod.h"
 #include <sstream>
 
-Hud::Hud(SDL_Renderer* r, int w, int h, Player* p) : renderer(r), width(w), height(h), player(p){}
+Hud::Hud(SDL_Renderer* r, int w, int h, Player* p) : renderer(r), player(p), width(w), height(h){}
 
 void Hud::draw() const { 
   if(showHud) {

@@ -8,6 +8,7 @@ Player::Player( const std::string& name) :
   observers(),
   bullets("Bullet"),
   bulletInterval(Gamedata::getInstance().getXmlInt("Bullet/bulletInterval"))
+   
 { }
 
 Player::Player(const Player& s) :
@@ -76,14 +77,14 @@ void Player::shoot() {
     float x = 0;
     float y = getY()+getScaledHeight()/4;
     int minBulletSpeed = Gamedata::getInstance().getXmlInt("Bullet/speed");
-    if (vel[0] > 0) {
+    if (vel[0] >= 0) {
       x = getX()+getScaledWidth();
       vel[0] += minBulletSpeed;
     }
     else if (vel[0] < 0) {
       x = getX();
     vel[0] -= minBulletSpeed;
-    }    
+    }
     bullets.shoot(Vector2f(x, y), vel);
     timeSinceLastBullet = 0;
   }

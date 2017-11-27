@@ -77,12 +77,12 @@
 </Star>
 
 <Bullet>
-  <file>assets/bullet.png</file>
+  <file>assets/star.png</file>
   <frames>1</frames>
-  <imageWidth>31</imageWidth>
-  <imageHeight>31</imageHeight>
-  <frameInterval>50</frameInterval>
-  <speedX>100</speedX>
+  <imageWidth>32</imageWidth>
+  <imageHeight>32</imageHeight>
+  <frameInterval>1</frameInterval>
+  <speedX>0</speedX>
   <speedY>0</speedY>
   <speed>100</speed>
   <distance>300</distance>

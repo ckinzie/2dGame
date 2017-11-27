@@ -37,5 +37,6 @@ private:
   BulletPool bullets;
   int timeSinceLastBullet;
   int bulletInterval;
+  std::string bulletName;
 };
 #endif

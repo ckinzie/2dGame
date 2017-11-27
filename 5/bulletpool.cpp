@@ -31,7 +31,7 @@ BulletPool::BulletPool(const BulletPool& pool) :
 
 void BulletPool::shoot(const Vector2f& pos, const Vector2f& velocity) {
   if(freeList.empty()) {
-    Bullet b(name, pos, velocity);
+    Bullet b("Bullet", pos, velocity);
     bulletList.push_back(b);
   }
   else{
