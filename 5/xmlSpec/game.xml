@@ -84,9 +84,9 @@
   <frameInterval>1</frameInterval>
   <speedX>0</speedX>
   <speedY>0</speedY>
-  <minSpeed>100</minSpeed>
+  <minSpeed>200</minSpeed>
   <distance>300</distance>
-  <bulletInterval>200</bulletInterval>
+  <bulletInterval>400</bulletInterval>
   <transparency>true</transparency>
 </Bullet>
 

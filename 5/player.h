@@ -21,6 +21,7 @@ public:
   void attach( SmartSprite* o ) { observers.push_back(o); } 
   void detach( SmartSprite* o );
   void shoot();
+  const std::string getName() const{ return name; }
 
   int bulletCount() const { return bullets.bulletCount(); }
   int freeCount() const { return bullets.freeCount(); }
@@ -31,6 +32,7 @@ public:
   void down();
   void stop();
 private:
+  std::string name;
   bool collision;
   bool east = true;
   Vector2f initialVelocity;

@@ -25,7 +25,7 @@ MultiSprite2d::MultiSprite2d( const std::string& name, const std::string& nameR)
   timeSinceLastFrame( 0 ),
   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
   worldHeight(Gamedata::getInstance().getXmlInt("world/height")),
-  flip(false)
+  facingRight(false)
 { }
 
 MultiSprite2d::MultiSprite2d(const MultiSprite2d& s) :
@@ -38,7 +38,7 @@ MultiSprite2d::MultiSprite2d(const MultiSprite2d& s) :
   timeSinceLastFrame( s.timeSinceLastFrame ),
   worldWidth( s.worldWidth ),
   worldHeight( s.worldHeight ),
-  flip(s.flip)
+  facingRight(s.facingRight)
   { }
 
 MultiSprite2d& MultiSprite2d::operator=(const MultiSprite2d& s) {
@@ -51,11 +51,12 @@ MultiSprite2d& MultiSprite2d::operator=(const MultiSprite2d& s) {
   timeSinceLastFrame = ( s.timeSinceLastFrame );
   worldWidth = ( s.worldWidth );
   worldHeight = ( s.worldHeight );
+  facingRight = s.facingRight;
   return *this;
 }
 
 void MultiSprite2d::draw() const { 
-  if (flip)
+  if (facingRight)
     images[currentFrame]->draw(getX(), getY(), getScale());
   else
     imagesR[currentFrame]->draw(getX(), getY(), getScale());
@@ -75,11 +76,11 @@ void MultiSprite2d::update(Uint32 ticks) {
   }
 
   if ( getX() < 0) {
-    flip = false;
+    facingRight = false;
     setVelocityX( fabs( getVelocityX() ) );
   }
   if ( getX() > worldWidth-getScaledWidth()) {
-    flip = true;
+    facingRight = true;
     setVelocityX( -fabs( getVelocityX() ) );
   }  
 

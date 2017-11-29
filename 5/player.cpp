@@ -1,8 +1,9 @@
 #include "player.h"
 #include "gamedata.h"
 
-Player::Player( const std::string& name) :
-  MultiSprite2d(name + "R", name),
+Player::Player( const std::string& s) :
+  MultiSprite2d(s + "R", s),
+  name(s),
   collision(false),
   initialVelocity(getVelocity()),
   observers(),
@@ -12,7 +13,8 @@ Player::Player( const std::string& name) :
 { }
 
 Player::Player(const Player& s) :
-  MultiSprite2d(s), 
+  MultiSprite2d(s),
+  name(s.getName()),
   collision(s.collision),
   initialVelocity(s.getVelocity()),
   observers(s.observers),
@@ -22,6 +24,7 @@ Player::Player(const Player& s) :
 
 Player& Player::operator=(const Player& s) {
   MultiSprite2d::operator=(s);
+  name = s.getName();
   collision = s.collision;
   initialVelocity = s.initialVelocity;
   return *this;
@@ -74,19 +77,17 @@ void Player::detach( SmartSprite* o ) {
 void Player::shoot() {
   if (timeSinceLastBullet > bulletInterval) {
     Vector2f vel = getVelocity();
-    float x = 0;
-    float y = getY()+getScaledHeight()/4;
+    float x = getPosition()[0];
+    float y = getPosition()[1] + Gamedata::getInstance().getXmlInt(getName() +"/imageHeight")/2;
     int minBulletSpeed = Gamedata::getInstance().getXmlInt("Bullet/minSpeed");
-    if (vel[0] >= 0) {
-      x = getX()+getScaledWidth();
+    if (vel[0] > 0 || !facingRight) {
+      x += Gamedata::getInstance().getXmlInt(getName() +"/imageWidth");
       vel[0] += minBulletSpeed;
     }
-    else if (vel[0] < 0) {
-      x = getX();
+    else if (vel[0] < 0 || facingRight) {
       vel[0] -= minBulletSpeed;
     }
-    //bullets.shoot(Vector2f(x, y), vel);
-    bullets.shoot(getPosition(), vel);
+    bullets.shoot(Vector2f(x, y), Vector2f(vel[0], 0));
     timeSinceLastBullet = 0;
   }
 }

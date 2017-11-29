@@ -26,7 +26,7 @@ public:
     return images[currentFrame]->getSurface();
   }
   void flipSprite() {
-    flip = !flip; }
+    facingRight = !facingRight; }
 
 protected:
   std::vector<Image *> images;
@@ -38,7 +38,7 @@ protected:
   float timeSinceLastFrame;
   int worldWidth;
   int worldHeight;
-  bool flip;
+  bool facingRight;
 
   void advanceFrame(Uint32 ticks);
   MultiSprite2d& operator=(const MultiSprite2d&);
