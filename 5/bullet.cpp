@@ -29,7 +29,7 @@ void Bullet::update(Uint32 ticks) {
   if (getY() < 0 || getY() + getScaledHeight() > worldHeight ) {
     tooFar = true;
   }
-  if (getX() < 0 || getX() > worldHeight ) {
+  if (getX() < 0 || getX() > worldWidth ) {
     tooFar = true;
   }
   distance += (hypot(getX()-pos[0], getY()-pos[1]));

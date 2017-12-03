@@ -106,11 +106,9 @@ void MultiSprite2d::update(Uint32 ticks) {
     setVelocityY( -fabs( getVelocityY() ) );
   }
   if ( getX() < 0) {
-    facingRight = true;
     setVelocityX( fabs( getVelocityX() ) );
   }
   if ( getX() > worldWidth-getScaledWidth()) {
-    facingRight = false;
     setVelocityX( -fabs( getVelocityX() ) );
   }  
 

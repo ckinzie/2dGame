@@ -62,8 +62,6 @@ void Engine::draw() const {
   hud->draw();
 
   strategy->draw();
-  if(collision)
-    IOmod::getInstance().writeText("COLLISION WARNING!", 300, 240, {255,0,0,0});
 
   io.writeText("Connor Kinzie", 30, 400, {255,255,0,0});
 
