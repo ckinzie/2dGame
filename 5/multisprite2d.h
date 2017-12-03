@@ -5,10 +5,13 @@
 #include <cmath>
 #include "drawable.h"
 
+class ExplodingSprite;
+
 class MultiSprite2d : public Drawable {
 public:
   MultiSprite2d(const std::string&, const std::string&);
   MultiSprite2d(const MultiSprite2d&);
+  ~MultiSprite2d();
 
   virtual void draw() const;
   virtual void update(Uint32 ticks);
@@ -28,9 +31,12 @@ public:
   void flipSprite() {
     facingRight = !facingRight; }
 
+  virtual void explode();
+
 protected:
   std::vector<Image *> images;
   std::vector<Image *> imagesR;
+  ExplodingSprite* explosion;
 
   unsigned currentFrame;
   unsigned numberOfFrames;

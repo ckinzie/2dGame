@@ -1,6 +1,7 @@
 #include "multisprite2d.h"
 #include "gamedata.h"
 #include "renderContext.h"
+#include "explodingSprite.h"
 
 void MultiSprite2d::advanceFrame(Uint32 ticks) {
 	timeSinceLastFrame += ticks;
@@ -9,6 +10,8 @@ void MultiSprite2d::advanceFrame(Uint32 ticks) {
 		timeSinceLastFrame = 0;
 	}
 }
+
+MultiSprite2d::~MultiSprite2d( ) { if (explosion) delete explosion; }
 
 MultiSprite2d::MultiSprite2d( const std::string& name, const std::string& nameR) :
   Drawable(name, 
@@ -19,19 +22,21 @@ MultiSprite2d::MultiSprite2d( const std::string& name, const std::string& nameR)
            ),
   images( RenderContext::getInstance()->getImages(name) ),
   imagesR( RenderContext::getInstance()->getImages(nameR) ),
+  explosion(nullptr),
   currentFrame(0),
   numberOfFrames( Gamedata::getInstance().getXmlInt(name+"/frames") ),
   frameInterval( Gamedata::getInstance().getXmlInt(name+"/frameInterval")),
   timeSinceLastFrame( 0 ),
   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
   worldHeight(Gamedata::getInstance().getXmlInt("world/height")),
-  facingRight(false)
+  facingRight(true)
 { }
 
 MultiSprite2d::MultiSprite2d(const MultiSprite2d& s) :
   Drawable(s), 
   images(s.images),
   imagesR(s.imagesR),
+  explosion(s.explosion),
   currentFrame(s.currentFrame),
   numberOfFrames( s.numberOfFrames ),
   frameInterval( s.frameInterval ),
@@ -45,6 +50,7 @@ MultiSprite2d& MultiSprite2d::operator=(const MultiSprite2d& s) {
   Drawable::operator=(s);
   images = (s.images);
   imagesR = (s.imagesR);
+  explosion = s.explosion;
   currentFrame = (s.currentFrame);
   numberOfFrames = ( s.numberOfFrames );
   frameInterval = ( s.frameInterval );
@@ -55,14 +61,39 @@ MultiSprite2d& MultiSprite2d::operator=(const MultiSprite2d& s) {
   return *this;
 }
 
+void MultiSprite2d::explode() {
+  if ( !explosion ) {
+    if (facingRight) {
+      Sprite sprite(getName(), getPosition(), getVelocity(), imagesR[currentFrame]);
+      explosion = new ExplodingSprite(sprite);
+    }
+    else {
+      Sprite sprite(getName(), getPosition(), getVelocity(), images[currentFrame]);
+      explosion = new ExplodingSprite(sprite);
+    }
+  }
+}
+
 void MultiSprite2d::draw() const { 
-  if (facingRight)
-    images[currentFrame]->draw(getX(), getY(), getScale());
-  else
-    imagesR[currentFrame]->draw(getX(), getY(), getScale());
+  if ( explosion ) explosion->draw();
+  else {
+    if (facingRight)
+      imagesR[currentFrame]->draw(getX(), getY(), getScale());
+    else
+      images[currentFrame]->draw(getX(), getY(), getScale());
+  }
 }
 
 void MultiSprite2d::update(Uint32 ticks) { 
+  if ( explosion ) {
+    explosion->update(ticks);
+    if ( explosion->chunkCount() == 0 ) {
+      delete explosion;
+      explosion = NULL;
+    }
+    return;
+  }
+
   advanceFrame(ticks);
 
   Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
@@ -74,13 +105,12 @@ void MultiSprite2d::update(Uint32 ticks) {
   if ( getY() > worldHeight-getScaledHeight()) {
     setVelocityY( -fabs( getVelocityY() ) );
   }
-
   if ( getX() < 0) {
-    facingRight = false;
+    facingRight = true;
     setVelocityX( fabs( getVelocityX() ) );
   }
   if ( getX() > worldWidth-getScaledWidth()) {
-    facingRight = true;
+    facingRight = false;
     setVelocityX( -fabs( getVelocityX() ) );
   }  
 

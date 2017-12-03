@@ -3,13 +3,15 @@
 #include <string>
 #include "drawable.h"
 
+class ExplodingSprite;
+
 class Sprite : public Drawable {
 public:
   Sprite(const std::string&);
   Sprite(const std::string&, const Vector2f& pos, const Vector2f& vel, 
          const Image*);
   Sprite(const Sprite&);
-  virtual ~Sprite() { } 
+  virtual ~Sprite();
   Sprite& operator=(const Sprite&);
 
   virtual void draw() const;
@@ -22,8 +24,11 @@ public:
   int getScaledWidth()  const { return getScale()*image->getWidth();  } 
   int getScaledHeight() const { return getScale()*image->getHeight(); } 
 
+  virtual void explode();
+
 private:
   const Image * image;
+  ExplodingSprite* explosion;
 
 protected:
   int worldWidth;

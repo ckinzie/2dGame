@@ -53,6 +53,10 @@
   <speedX>200</speedX>
   <speedY>200</speedY>
   <transparency>false</transparency>
+  <chunk>
+    <size>9</size>
+    <distance>200</distance>
+  </chunk>
 </Goomba>
 
 <GoombaR>
@@ -65,6 +69,10 @@
   <speedX>200</speedX>
   <speedY>200</speedY>
   <transparency>false</transparency>
+  <chunk>
+    <size>9</size>
+    <distance>200</distance>
+  </chunk>
 </GoombaR>
 
 <Star>

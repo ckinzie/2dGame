@@ -1,4 +1,4 @@
-build/multisprite.o: multisprite.cpp multisprite.h drawable.h \
+build/chunk.o: chunk.cpp chunk.h sprite.h drawable.h \
   /usr/include/SDL2/SDL.h /usr/include/SDL2/SDL_main.h \
   /usr/include/SDL2/SDL_stdinc.h /usr/include/SDL2/SDL_config.h \
   /usr/include/SDL2/SDL_platform.h /usr/include/SDL2/begin_code.h \
@@ -21,10 +21,11 @@ build/multisprite.o: multisprite.cpp multisprite.h drawable.h \
   /usr/include/SDL2/SDL_power.h /usr/include/SDL2/SDL_render.h \
   /usr/include/SDL2/SDL_system.h /usr/include/SDL2/SDL_timer.h \
   /usr/include/SDL2/SDL_version.h vector2f.h image.h gamedata.h \
-  parseXML.h renderContext.h imageFactory.h spriteSheet.h \
-  explodingSprite.h chunk.h sprite.h
+  parseXML.h
 
-multisprite.h:
+chunk.h:
+
+sprite.h:
 
 drawable.h:
 
@@ -121,15 +122,3 @@ image.h:
 gamedata.h:
 
 parseXML.h:
-
-renderContext.h:
-
-imageFactory.h:
-
-spriteSheet.h:
-
-explodingSprite.h:
-
-chunk.h:
-
-sprite.h:

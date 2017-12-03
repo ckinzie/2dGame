@@ -21,7 +21,8 @@ build/multisprite2d.o: multisprite2d.cpp multisprite2d.h drawable.h \
   /usr/include/SDL2/SDL_power.h /usr/include/SDL2/SDL_render.h \
   /usr/include/SDL2/SDL_system.h /usr/include/SDL2/SDL_timer.h \
   /usr/include/SDL2/SDL_version.h vector2f.h image.h gamedata.h \
-  parseXML.h renderContext.h imageFactory.h spriteSheet.h
+  parseXML.h renderContext.h imageFactory.h spriteSheet.h \
+  explodingSprite.h chunk.h sprite.h
 
 multisprite2d.h:
 
@@ -126,3 +127,9 @@ renderContext.h:
 imageFactory.h:
 
 spriteSheet.h:
+
+explodingSprite.h:
+
+chunk.h:
+
+sprite.h:

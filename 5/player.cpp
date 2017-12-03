@@ -80,11 +80,11 @@ void Player::shoot() {
     float x = getPosition()[0];
     float y = getPosition()[1] + Gamedata::getInstance().getXmlInt(getName() +"/imageHeight")/2;
     int minBulletSpeed = Gamedata::getInstance().getXmlInt("Bullet/minSpeed");
-    if (vel[0] > 0 || !facingRight) {
+    if (vel[0] > 0 || facingRight) {
       x += Gamedata::getInstance().getXmlInt(getName() +"/imageWidth");
       vel[0] += minBulletSpeed;
     }
-    else if (vel[0] < 0 || facingRight) {
+    else if (vel[0] < 0 || !facingRight) {
       vel[0] -= minBulletSpeed;
     }
     bullets.shoot(Vector2f(x, y), Vector2f(vel[0], 0));
@@ -101,6 +101,7 @@ void Player::update(Uint32 ticks) {
   if ( !collision ) advanceFrame(ticks);
   timeSinceLastBullet += ticks;
   bullets.update(ticks);
+  MultiSprite2d::update(ticks);
 
   Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
   setPosition(getPosition() + incr);
