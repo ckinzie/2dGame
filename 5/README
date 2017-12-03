@@ -6,13 +6,12 @@ Clemson Email Address: ckinzie@clemson.edu
 
 Project no: 5 
 
-Project due date: November 29th, 2017
+Project due date: December 3rd, 2017
 
-Project description: The game I want to build will be Pokemon themed. You will walk around one of the routes encounter different pokemon. You will have to either throw a rock at the mean ones or try to throw pokeballs at the good ones and catch them. It will be a top down game so you can walk in all 4 directions. Score will be kept by how many good pokemon you caught. You win if you catch them all before the bad pokemon make you faint. The sprites I have right now will not be final. Due to my VM unexpectedly crashing, I was not able to get all my sprites in time. The ones I have right now are from:
--spritedatabase.net/file/5518/Route_102
+Project description: The game I am making will be a top down game about a pirate on an island. You will have to shoot the bad guys on your quest to dig up the burried treasure. You will wander around the island looking for a shovel to dig up the treasure and a key to unlock the chest. Once you've gotten those items, you can get the treasure and win. I want to make my own sprites, but I haven't made any I'm happy with so the ones I have for now are:
 -https://orig00.deviantart.net/036d/f/2011/148/4/9/lil___bud_sprites_by_the_koopa_of_troopa-d3hg3bp.png
 -https://i.pinimg.com/originals/df/0f/ab/df0fab6b20c12687f61d17a54c06e335.png
 
-The easiest part of this project:
+The easiest part of this project: Bullet pooling was not too bad, especially with the help of your video
 
-Problems that I had in completing this project: 
+Problems that I had in completing this project: Explosions gave me a bit of trouble, but I was able to overcome it fairly quickly.

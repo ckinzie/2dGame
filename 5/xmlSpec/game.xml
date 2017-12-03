@@ -19,12 +19,12 @@
 </view>
 
 <world>
-  <width>3200</width>
-  <height>1283</height>
+  <width>2000</width>
+  <height>2000</height>
 </world>
 
 <background>
-  <file>assets/Route102.bmp</file>
+  <file>assets/island.png</file>
   <factor>1</factor>
   <transparency>false</transparency>
 </background>
