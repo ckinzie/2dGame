@@ -22,6 +22,7 @@ public:
   void detach( SmartSprite* o );
   void shoot();
   const std::string getName() const{ return name; }
+  BulletPool getBulletPool() { return bullets;}
 
   int bulletCount() const { return bullets.bulletCount(); }
   int freeCount() const { return bullets.freeCount(); }

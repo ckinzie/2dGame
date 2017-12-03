@@ -85,6 +85,13 @@ void Engine::checkForCollisions() {
     player->missed();
     collision = false;
   }
+
+  for ( Sprite* s : sprites ) {
+    if ( player->getBulletPool().collided(s) ) {
+      s->explode();
+      //player->getBulletPool()->collided(d)
+    }
+  }
 }
 
 void Engine::update(Uint32 ticks) {

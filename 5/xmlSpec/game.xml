@@ -55,7 +55,7 @@
   <transparency>false</transparency>
   <chunk>
     <size>9</size>
-    <distance>200</distance>
+    <distance>100</distance>
   </chunk>
 </Goomba>
 
@@ -71,7 +71,7 @@
   <transparency>false</transparency>
   <chunk>
     <size>9</size>
-    <distance>200</distance>
+    <distance>100</distance>
   </chunk>
 </GoombaR>
 
@@ -82,6 +82,10 @@
   <speedY>150</speedY>
   <safeDistance>75</safeDistance>
   <transparency>false</transparency>
+  <chunk>
+    <size>9</size>
+    <distance>100</distance>
+  </chunk>
 </Star>
 
 <Bullet>

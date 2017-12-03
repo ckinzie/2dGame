@@ -44,11 +44,19 @@ void BulletPool::shoot(const Vector2f& pos, const Vector2f& velocity) {
   }
 }
 
-bool BulletPool::collided(const Drawable* obj) const {
-  for(const auto& b : bulletList)
-    if(strategy->execute(b, *obj))
-      return true;
-  return false;
+bool BulletPool::collided(const Drawable* obj) {
+  bool collision = false;
+  std::list<Bullet>::iterator ptr = bulletList.begin();
+  while (ptr != bulletList.end()) {
+    if(strategy->execute(*ptr, *obj)) {
+      freeList.push_back(*ptr);
+      ptr = bulletList.erase(ptr);
+      collision = true;
+    }
+    else
+      ptr++;
+  } 
+  return collision;   
 }
 
 void BulletPool::draw() const {

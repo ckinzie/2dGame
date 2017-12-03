@@ -102,7 +102,7 @@ void Player::update(Uint32 ticks) {
   timeSinceLastBullet += ticks;
   bullets.update(ticks);
   MultiSprite2d::update(ticks);
-
+/*
   Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
   setPosition(getPosition() + incr);
 
@@ -114,7 +114,7 @@ void Player::update(Uint32 ticks) {
     setVelocityX(std::abs(getVelocityX()));
   if (getY() > worldHeight-getScaledHeight())
     setVelocityX(-std::abs(getVelocityX()));
-
+*/
   std::list<SmartSprite*>::iterator ptr = observers.begin();
   while ( ptr != observers.end() ) {
     (*ptr)->setPlayerPos( getPosition() );
