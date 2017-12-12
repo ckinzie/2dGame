@@ -9,7 +9,7 @@ class ExplodingSprite;
 
 class MultiSprite2d : public Drawable {
 public:
-  MultiSprite2d(const std::string&, const std::string&);
+  MultiSprite2d(const std::string&);
   MultiSprite2d(const MultiSprite2d&);
   ~MultiSprite2d();
 
@@ -28,14 +28,16 @@ public:
   virtual const SDL_Surface* getSurface() const { 
     return images[currentFrame]->getSurface();
   }
-  void flipSprite() {
-    facingRight = !facingRight; }
+  void direction(int d) {
+    dir = d; }
 
   virtual void explode();
 
 protected:
   std::vector<Image *> images;
   std::vector<Image *> imagesR;
+  std::vector<Image *> imagesL;
+  std::vector<Image *> imagesD;
   ExplodingSprite* explosion;
 
   unsigned currentFrame;
@@ -45,6 +47,7 @@ protected:
   int worldWidth;
   int worldHeight;
   bool facingRight;
+  int dir = 2;
 
   void advanceFrame(Uint32 ticks);
   MultiSprite2d& operator=(const MultiSprite2d&);

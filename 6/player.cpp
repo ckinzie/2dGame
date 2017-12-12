@@ -2,7 +2,7 @@
 #include "gamedata.h"
 
 Player::Player( const std::string& s) :
-  MultiSprite2d(s + "R", s),
+  MultiSprite2d(s),
   name(s),
   collision(false),
   initialVelocity(getVelocity()),
@@ -41,29 +41,25 @@ void Player::toggleGod() {
 void Player::right() { 
   if ( getX() < worldWidth-getScaledWidth()) {
     setVelocityX(initialVelocity[0]);
-    if(!east) {
-      east = true;
-      flipSprite();
-    }
+    direction(1);
   }
 } 
 void Player::left()  { 
   if ( getX() > 0) {
     setVelocityX(-initialVelocity[0]);
-    if(east) {
-      east = false;
-      flipSprite();
-    }
+    direction(3);
   }
 } 
 void Player::up()    { 
   if ( getY() > 0) {
     setVelocityY( -initialVelocity[1] );
+    direction(0);
   }
 } 
 void Player::down()  { 
   if ( getY() < worldHeight-getScaledHeight()) {
     setVelocityY( initialVelocity[1] );
+    direction(2);
   }
 }
 

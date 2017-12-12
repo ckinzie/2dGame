@@ -13,7 +13,7 @@ void MultiSprite2d::advanceFrame(Uint32 ticks) {
 
 MultiSprite2d::~MultiSprite2d( ) { if (explosion) delete explosion; }
 
-MultiSprite2d::MultiSprite2d( const std::string& name, const std::string& nameR) :
+MultiSprite2d::MultiSprite2d( const std::string& name) :
   Drawable(name, 
            Vector2f(Gamedata::getInstance().getXmlInt(name+"/startLoc/x"), 
                     Gamedata::getInstance().getXmlInt(name+"/startLoc/y")), 
@@ -21,7 +21,9 @@ MultiSprite2d::MultiSprite2d( const std::string& name, const std::string& nameR)
                     Gamedata::getInstance().getXmlInt(name+"/speedY"))
            ),
   images( RenderContext::getInstance()->getImages(name) ),
-  imagesR( RenderContext::getInstance()->getImages(nameR) ),
+  imagesR( RenderContext::getInstance()->getImages(name + "R") ),
+  imagesL( RenderContext::getInstance()->getImages(name + "L") ),
+  imagesD( RenderContext::getInstance()->getImages(name + "D") ),
   explosion(nullptr),
   currentFrame(0),
   numberOfFrames( Gamedata::getInstance().getXmlInt(name+"/frames") ),
@@ -36,6 +38,8 @@ MultiSprite2d::MultiSprite2d(const MultiSprite2d& s) :
   Drawable(s), 
   images(s.images),
   imagesR(s.imagesR),
+  imagesL(s.imagesL),
+  imagesD(s.imagesD),
   explosion(s.explosion),
   currentFrame(s.currentFrame),
   numberOfFrames( s.numberOfFrames ),
@@ -50,6 +54,8 @@ MultiSprite2d& MultiSprite2d::operator=(const MultiSprite2d& s) {
   Drawable::operator=(s);
   images = (s.images);
   imagesR = (s.imagesR);
+  imagesL = (s.imagesL);
+  imagesD = (s.imagesD);
   explosion = s.explosion;
   currentFrame = (s.currentFrame);
   numberOfFrames = ( s.numberOfFrames );
@@ -77,10 +83,14 @@ void MultiSprite2d::explode() {
 void MultiSprite2d::draw() const { 
   if ( explosion ) explosion->draw();
   else {
-    if (facingRight)
-      imagesR[currentFrame]->draw(getX(), getY(), getScale());
-    else
+    if (dir == 0)
       images[currentFrame]->draw(getX(), getY(), getScale());
+    else if (dir == 1)
+      imagesR[currentFrame]->draw(getX(), getY(), getScale());
+    else if (dir == 3)
+      imagesL[currentFrame]->draw(getX(), getY(), getScale());
+    else
+      imagesD[currentFrame]->draw(getX(), getY(), getScale());
   }
 }
 

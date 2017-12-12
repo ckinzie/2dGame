@@ -166,16 +166,44 @@ void Engine::play() {
         player->down();
       }
       if (keystate[SDL_SCANCODE_UP]) {
-        player->shoot(0,1);
+		   if (keystate[SDL_SCANCODE_RIGHT]) {
+		     player->shoot(1,1);
+		   }
+		   else if (keystate[SDL_SCANCODE_LEFT]) {
+		     player->shoot(-1,1);
+		   }
+         else
+           player->shoot(0,1);
       }
       if (keystate[SDL_SCANCODE_RIGHT]) {
-        player->shoot(1,0);
+		   if (keystate[SDL_SCANCODE_UP]) {
+		     player->shoot(1,1);
+		   }
+		   else if (keystate[SDL_SCANCODE_DOWN]) {
+		     player->shoot(1,-1);
+		   }
+         else
+           player->shoot(1,0);
       }
       if (keystate[SDL_SCANCODE_LEFT]) {
-        player->shoot(-1,0);
+		   if (keystate[SDL_SCANCODE_UP]) {
+		     player->shoot(-1,1);
+		   }
+		   else if (keystate[SDL_SCANCODE_DOWN]) {
+		     player->shoot(-1,-1);
+		   }
+         else
+           player->shoot(-1,0);
       }
       if (keystate[SDL_SCANCODE_DOWN]) {
-        player->shoot(0,-1);
+         if (keystate[SDL_SCANCODE_RIGHT]) {
+		     player->shoot(1,-1);
+		   }
+		   else if (keystate[SDL_SCANCODE_LEFT]) {
+		     player->shoot(-1,-1);
+		   }
+         else
+           player->shoot(0,-1);
       }
       draw();
       update(ticks);

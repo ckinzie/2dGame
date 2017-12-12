@@ -20,7 +20,7 @@ public:
   Player& operator=(const Player&);
   void attach( SmartSprite* o ) { observers.push_back(o); } 
   void detach( SmartSprite* o );
-  void shoot();
+  void shoot(int, int);
   const std::string getName() const{ return name; }
   BulletPool getBulletPool() { return bullets;}
   void toggleGod();

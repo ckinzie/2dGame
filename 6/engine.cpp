@@ -31,7 +31,7 @@ Engine::Engine() :
   renderer( rc->getRenderer() ),
   background("background", Gamedata::getInstance().getXmlInt("background/factor") ),
   viewport( Viewport::getInstance() ),
-  player(new Player("Goomba")),
+  player(new Player("Pirate")),
   strategy(),
   collision(false),
   currentSprite(0),

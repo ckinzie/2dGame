@@ -5,10 +5,13 @@
 #include <cmath>
 #include "drawable.h"
 
+class ExplodingSprite;
+
 class MultiSprite2d : public Drawable {
 public:
-  MultiSprite2d(const std::string&, const std::string&);
+  MultiSprite2d(const std::string&);
   MultiSprite2d(const MultiSprite2d&);
+  ~MultiSprite2d();
 
   virtual void draw() const;
   virtual void update(Uint32 ticks);
@@ -25,10 +28,17 @@ public:
   virtual const SDL_Surface* getSurface() const { 
     return images[currentFrame]->getSurface();
   }
+  void direction(int d) {
+    dir = d; }
+
+  virtual void explode();
 
 protected:
   std::vector<Image *> images;
   std::vector<Image *> imagesR;
+  std::vector<Image *> imagesL;
+  std::vector<Image *> imagesD;
+  ExplodingSprite* explosion;
 
   unsigned currentFrame;
   unsigned numberOfFrames;
@@ -36,7 +46,8 @@ protected:
   float timeSinceLastFrame;
   int worldWidth;
   int worldHeight;
-  bool flip;
+  bool facingRight;
+  int dir;
 
   void advanceFrame(Uint32 ticks);
   MultiSprite2d& operator=(const MultiSprite2d&);

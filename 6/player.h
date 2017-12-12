@@ -36,7 +36,6 @@ public:
 private:
   std::string name;
   bool collision;
-  bool east = true;
   bool godMode = false;
   Vector2f initialVelocity;
   std::list<SmartSprite*> observers;

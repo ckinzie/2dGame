@@ -43,13 +43,13 @@
   <height>150</height>
 </HUD>
 
-<Goomba>
-  <file>assets/goombaBigR.png</file>
+<Pirate>
+  <file>assets/pirateU.png</file>
   <startLoc x="50" y="140"/>
-  <frames>7</frames>
-  <imageWidth>60</imageWidth>
-  <imageHeight>86</imageHeight>
-  <frameInterval>50</frameInterval>
+  <frames>4</frames>
+  <imageWidth>30</imageWidth>
+  <imageHeight>32</imageHeight>
+  <frameInterval>200</frameInterval>
   <speedX>200</speedX>
   <speedY>200</speedY>
   <transparency>false</transparency>
@@ -57,15 +57,15 @@
     <size>9</size>
     <distance>100</distance>
   </chunk>
-</Goomba>
+</Pirate>
 
-<GoombaR>
-  <file>assets/goombaBig.png</file>
+<PirateD>
+  <file>assets/pirateD.png</file>
   <startLoc x="50" y="140"/>
-  <frames>7</frames>
-  <imageWidth>60</imageWidth>
-  <imageHeight>86</imageHeight>
-  <frameInterval>50</frameInterval>
+  <frames>4</frames>
+  <imageWidth>30</imageWidth>
+  <imageHeight>32</imageHeight>
+  <frameInterval>200</frameInterval>
   <speedX>200</speedX>
   <speedY>200</speedY>
   <transparency>false</transparency>
@@ -73,7 +73,39 @@
     <size>9</size>
     <distance>100</distance>
   </chunk>
-</GoombaR>
+</PirateD>
+
+<PirateR>
+  <file>assets/pirateR.png</file>
+  <startLoc x="50" y="140"/>
+  <frames>4</frames>
+  <imageWidth>30</imageWidth>
+  <imageHeight>32</imageHeight>
+  <frameInterval>200</frameInterval>
+  <speedX>200</speedX>
+  <speedY>200</speedY>
+  <transparency>false</transparency>
+  <chunk>
+    <size>9</size>
+    <distance>100</distance>
+  </chunk>
+</PirateR>
+
+<PirateL>
+  <file>assets/pirateL.png</file>
+  <startLoc x="50" y="140"/>
+  <frames>4</frames>
+  <imageWidth>30</imageWidth>
+  <imageHeight>32</imageHeight>
+  <frameInterval>200</frameInterval>
+  <speedX>200</speedX>
+  <speedY>200</speedY>
+  <transparency>false</transparency>
+  <chunk>
+    <size>9</size>
+    <distance>100</distance>
+  </chunk>
+</PirateL>
 
 <Star>
   <file>assets/star.png</file>
@@ -96,7 +128,7 @@
   <frameInterval>1</frameInterval>
   <speedX>0</speedX>
   <speedY>0</speedY>
-  <minSpeed>400</minSpeed>
+  <minSpeed>300</minSpeed>
   <distance>300</distance>
   <bulletInterval>400</bulletInterval>
   <transparency>true</transparency>
