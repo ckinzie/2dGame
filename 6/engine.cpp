@@ -128,11 +128,11 @@ void Engine::play() {
           hud->toggleHud();
           flag = false;
         }
-        if ( keystate[SDL_SCANCODE_E] ) {
-          player->explode();
-        }
         if ( keystate[SDL_SCANCODE_M] ) {
           sound.toggleMusic();
+        }
+        if ( keystate[SDL_SCANCODE_G] ) {
+          player->toggleGod();
         }
         if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
           std::cout << "Initiating frame capture" << std::endl;
@@ -165,8 +165,45 @@ void Engine::play() {
       if (keystate[SDL_SCANCODE_S]) {
         player->down();
       }
-      if (keystate[SDL_SCANCODE_SPACE]) {
-        player->shoot();
+      if (keystate[SDL_SCANCODE_UP]) {
+		   if (keystate[SDL_SCANCODE_RIGHT]) {
+		     player->shoot(1,1);
+		   }
+		   else if (keystate[SDL_SCANCODE_LEFT]) {
+		     player->shoot(-1,1);
+		   }
+         else
+           player->shoot(0,1);
+      }
+      if (keystate[SDL_SCANCODE_RIGHT]) {
+		   if (keystate[SDL_SCANCODE_UP]) {
+		     player->shoot(1,1);
+		   }
+		   else if (keystate[SDL_SCANCODE_DOWN]) {
+		     player->shoot(1,-1);
+		   }
+         else
+           player->shoot(1,0);
+      }
+      if (keystate[SDL_SCANCODE_LEFT]) {
+		   if (keystate[SDL_SCANCODE_UP]) {
+		     player->shoot(-1,1);
+		   }
+		   else if (keystate[SDL_SCANCODE_DOWN]) {
+		     player->shoot(-1,-1);
+		   }
+         else
+           player->shoot(-1,0);
+      }
+      if (keystate[SDL_SCANCODE_DOWN]) {
+         if (keystate[SDL_SCANCODE_RIGHT]) {
+		     player->shoot(1,-1);
+		   }
+		   else if (keystate[SDL_SCANCODE_LEFT]) {
+		     player->shoot(-1,-1);
+		   }
+         else
+           player->shoot(0,-1);
       }
       draw();
       update(ticks);

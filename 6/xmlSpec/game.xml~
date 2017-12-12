@@ -19,12 +19,12 @@
 </view>
 
 <world>
-  <width>3200</width>
-  <height>1283</height>
+  <width>2000</width>
+  <height>2000</height>
 </world>
 
 <background>
-  <file>assets/Route102.bmp</file>
+  <file>assets/island.png</file>
   <factor>1</factor>
   <transparency>false</transparency>
 </background>
@@ -39,8 +39,8 @@
 </font>
 
 <HUD>
-  <width>200</width>
-  <height>250</height>
+  <width>220</width>
+  <height>150</height>
 </HUD>
 
 <Goomba>
@@ -53,6 +53,10 @@
   <speedX>200</speedX>
   <speedY>200</speedY>
   <transparency>false</transparency>
+  <chunk>
+    <size>9</size>
+    <distance>100</distance>
+  </chunk>
 </Goomba>
 
 <GoombaR>
@@ -65,8 +69,11 @@
   <speedX>200</speedX>
   <speedY>200</speedY>
   <transparency>false</transparency>
+  <chunk>
+    <size>9</size>
+    <distance>100</distance>
+  </chunk>
 </GoombaR>
-
 
 <Star>
   <file>assets/star.png</file>
@@ -75,6 +82,24 @@
   <speedY>150</speedY>
   <safeDistance>75</safeDistance>
   <transparency>false</transparency>
+  <chunk>
+    <size>9</size>
+    <distance>100</distance>
+  </chunk>
 </Star>
+
+<Bullet>
+  <file>assets/bullet.png</file>
+  <frames>1</frames>
+  <imageWidth>32</imageWidth>
+  <imageHeight>32</imageHeight>
+  <frameInterval>1</frameInterval>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <minSpeed>400</minSpeed>
+  <distance>300</distance>
+  <bulletInterval>400</bulletInterval>
+  <transparency>true</transparency>
+</Bullet>
 
 </GameData>

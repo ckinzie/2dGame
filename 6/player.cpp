@@ -34,6 +34,10 @@ void Player::stop() {
   setVelocity(Vector2f(0,0));
 }
 
+void Player::toggleGod() { 
+  godMode = !godMode;
+}
+
 void Player::right() { 
   if ( getX() < worldWidth-getScaledWidth()) {
     setVelocityX(initialVelocity[0]);
@@ -74,20 +78,33 @@ void Player::detach( SmartSprite* o ) {
   }
 }
 
-void Player::shoot() {
+void Player::shoot(int a, int b) {
   if (timeSinceLastBullet > bulletInterval) {
-    Vector2f vel = getVelocity();
+    Vector2f vel {0,0};
     float x = getPosition()[0];
-    float y = getPosition()[1] + Gamedata::getInstance().getXmlInt(getName() +"/imageHeight")/2;
+    float y = getPosition()[1];
     int minBulletSpeed = Gamedata::getInstance().getXmlInt("Bullet/minSpeed");
-    if (vel[0] > 0 || facingRight) {
+    if (a > 0) {
       x += Gamedata::getInstance().getXmlInt(getName() +"/imageWidth");
-      vel[0] += minBulletSpeed;
+      vel[0] = minBulletSpeed;
     }
-    else if (vel[0] < 0 || !facingRight) {
-      vel[0] -= minBulletSpeed;
+    else if (a < 0) {
+      vel[0] = -minBulletSpeed;
     }
-    bullets.shoot(Vector2f(x, y), Vector2f(vel[0], 0));
+    else
+      x += Gamedata::getInstance().getXmlInt(getName() +"/imageWidth")/2;
+
+    if (b > 0) {
+      vel[1] = -minBulletSpeed;
+    }
+    else if (b < 0) {
+      y += Gamedata::getInstance().getXmlInt(getName() +"/imageHeight");
+      vel[1] = minBulletSpeed;
+    }
+    else
+      y += Gamedata::getInstance().getXmlInt(getName() +"/imageHeight")/2;
+	
+    bullets.shoot(Vector2f(x, y), Vector2f(vel[0], vel[1]));
     timeSinceLastBullet = 0;
   }
 }
@@ -98,7 +115,11 @@ void Player::draw() const{
 }
 
 void Player::update(Uint32 ticks) {
-  if ( !collision ) advanceFrame(ticks);
+  if ( !collision )
+    advanceFrame(ticks);
+  else
+    if(!godMode)
+      MultiSprite2d::explode();
   timeSinceLastBullet += ticks;
   bullets.update(ticks);
   MultiSprite2d::update(ticks);

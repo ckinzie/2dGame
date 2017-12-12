@@ -37,7 +37,7 @@ Engine::Engine() :
   currentSprite(0),
   makeVideo( false )
 {
-  hud = new Hud(renderer, Gamedata::getInstance().getXmlInt("HUD/width"),Gamedata::getInstance().getXmlInt("HUD/height"));
+  hud = new Hud(renderer, Gamedata::getInstance().getXmlInt("HUD/width"),Gamedata::getInstance().getXmlInt("HUD/height"), player);
   int n = Gamedata::getInstance().getXmlInt("numberOfStars");
   sprites.reserve(n);
   Vector2f pos = player->getPosition();
@@ -62,8 +62,6 @@ void Engine::draw() const {
   hud->draw();
 
   strategy->draw();
-  if(collision)
-    IOmod::getInstance().writeText("COLLISION WARNING!", 300, 240, {255,0,0,0});
 
   io.writeText("Connor Kinzie", 30, 400, {255,255,0,0});
 
@@ -84,6 +82,13 @@ void Engine::checkForCollisions() {
   else {
     player->missed();
     collision = false;
+  }
+
+  for ( Sprite* s : sprites ) {
+    if ( player->getBulletPool().collided(s) ) {
+      s->explode();
+      //player->getBulletPool()->collided(d)
+    }
   }
 }
 
@@ -121,6 +126,13 @@ void Engine::play() {
         }
         if ( keystate[SDL_SCANCODE_F1] ) {
           hud->toggleHud();
+          flag = false;
+        }
+        if ( keystate[SDL_SCANCODE_M] ) {
+          sound.toggleMusic();
+        }
+        if ( keystate[SDL_SCANCODE_G] ) {
+          player->toggleGod();
         }
         if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
           std::cout << "Initiating frame capture" << std::endl;
@@ -152,6 +164,18 @@ void Engine::play() {
       }
       if (keystate[SDL_SCANCODE_S]) {
         player->down();
+      }
+      if (keystate[SDL_SCANCODE_UP]) {
+        player->shoot(0,1);
+      }
+      if (keystate[SDL_SCANCODE_RIGHT]) {
+        player->shoot(1,0);
+      }
+      if (keystate[SDL_SCANCODE_LEFT]) {
+        player->shoot(-1,0);
+      }
+      if (keystate[SDL_SCANCODE_DOWN]) {
+        player->shoot(0,-1);
       }
       draw();
       update(ticks);

@@ -20,9 +20,10 @@ public:
   Player& operator=(const Player&);
   void attach( SmartSprite* o ) { observers.push_back(o); } 
   void detach( SmartSprite* o );
-  void shoot();
+  void shoot(int, int);
   const std::string getName() const{ return name; }
   BulletPool getBulletPool() { return bullets;}
+  void toggleGod();
 
   int bulletCount() const { return bullets.bulletCount(); }
   int freeCount() const { return bullets.freeCount(); }
@@ -36,6 +37,7 @@ private:
   std::string name;
   bool collision;
   bool east = true;
+  bool godMode = false;
   Vector2f initialVelocity;
   std::list<SmartSprite*> observers;
   BulletPool bullets;
