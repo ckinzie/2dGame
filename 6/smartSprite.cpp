@@ -11,7 +11,7 @@ float distance(float x1, float y1, float x2, float y2) {
   return hypot(x, y);
 }
 
-void SmartSprite::goLeft()  { setVelocityX( -abs(getVelocityX()) );  }
+void SmartSprite::goLeft()  { setVelocityX( -fabs(getVelocityX()) );  }
 void SmartSprite::goRight() { setVelocityX( fabs(getVelocityX()) );  }
 void SmartSprite::goUp()    { setVelocityY( -fabs(getVelocityY()) ); }
 void SmartSprite::goDown()  { setVelocityY( fabs(getVelocityY()) );  }

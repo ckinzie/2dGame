@@ -131,6 +131,9 @@ void Engine::play() {
         if ( keystate[SDL_SCANCODE_E] ) {
           player->explode();
         }
+        if ( keystate[SDL_SCANCODE_M] ) {
+          sound.toggleMusic();
+        }
         if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
           std::cout << "Initiating frame capture" << std::endl;
           makeVideo = true;
