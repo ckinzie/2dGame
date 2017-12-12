@@ -1,0 +1,86 @@
+#include "multisprite2d.h"
+#include "gamedata.h"
+#include "renderContext.h"
+
+void MultiSprite2d::advanceFrame(Uint32 ticks) {
+	timeSinceLastFrame += ticks;
+	if (timeSinceLastFrame > frameInterval) {
+    currentFrame = (currentFrame+1) % numberOfFrames;
+		timeSinceLastFrame = 0;
+	}
+}
+
+MultiSprite2d::MultiSprite2d( const std::string& name, const std::string& nameR) :
+  Drawable(name, 
+           Vector2f(Gamedata::getInstance().getXmlInt(name+"/startLoc/x"), 
+                    Gamedata::getInstance().getXmlInt(name+"/startLoc/y")), 
+           Vector2f(Gamedata::getInstance().getXmlInt(name+"/speedX"),
+                    Gamedata::getInstance().getXmlInt(name+"/speedY"))
+           ),
+  images( RenderContext::getInstance()->getImages(name) ),
+  imagesR( RenderContext::getInstance()->getImages(nameR) ),
+  currentFrame(0),
+  numberOfFrames( Gamedata::getInstance().getXmlInt(name+"/frames") ),
+  frameInterval( Gamedata::getInstance().getXmlInt(name+"/frameInterval")),
+  timeSinceLastFrame( 0 ),
+  worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
+  worldHeight(Gamedata::getInstance().getXmlInt("world/height")),
+  flip(false)
+{ }
+
+MultiSprite2d::MultiSprite2d(const MultiSprite2d& s) :
+  Drawable(s), 
+  images(s.images),
+  imagesR(s.imagesR),
+  currentFrame(s.currentFrame),
+  numberOfFrames( s.numberOfFrames ),
+  frameInterval( s.frameInterval ),
+  timeSinceLastFrame( s.timeSinceLastFrame ),
+  worldWidth( s.worldWidth ),
+  worldHeight( s.worldHeight ),
+  flip(s.flip)
+  { }
+
+MultiSprite2d& MultiSprite2d::operator=(const MultiSprite2d& s) {
+  Drawable::operator=(s);
+  images = (s.images);
+  imagesR = (s.imagesR);
+  currentFrame = (s.currentFrame);
+  numberOfFrames = ( s.numberOfFrames );
+  frameInterval = ( s.frameInterval );
+  timeSinceLastFrame = ( s.timeSinceLastFrame );
+  worldWidth = ( s.worldWidth );
+  worldHeight = ( s.worldHeight );
+  return *this;
+}
+
+void MultiSprite2d::draw() const { 
+  if (flip)
+    images[currentFrame]->draw(getX(), getY(), getScale());
+  else
+    imagesR[currentFrame]->draw(getX(), getY(), getScale());
+}
+
+void MultiSprite2d::update(Uint32 ticks) { 
+  advanceFrame(ticks);
+
+  Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
+  setPosition(getPosition() + incr);
+
+  if ( getY() < 0) {
+    setVelocityY( fabs( getVelocityY() ) );
+  }
+  if ( getY() > worldHeight-getScaledHeight()) {
+    setVelocityY( -fabs( getVelocityY() ) );
+  }
+
+  if ( getX() < 0) {
+    flip = true;
+    setVelocityX( fabs( getVelocityX() ) );
+  }
+  if ( getX() > worldWidth-getScaledWidth()) {
+    flip = false;
+    setVelocityX( -fabs( getVelocityX() ) );
+  }  
+
+}

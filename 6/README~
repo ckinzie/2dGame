@@ -1,0 +1,18 @@
+Name: Connor Kinzie
+
+Course: CPSC 6160
+
+Clemson Email Address: ckinzie@clemson.edu
+
+Project no: 4 
+
+Project due date: November 13th, 2017
+
+Project description: The game I want to build will be Pokemon themed. You will walk around one of the routes encounter different pokemon. You will have to either throw a rock at the mean ones or try to throw pokeballs at the good ones and catch them. It will be a top down game so you can walk in all 4 directions. Score will be kept by how many good pokemon you caught. You win if you catch them all before the bad pokemon make you faint. The sprites I have right now will not be final. Due to my VM unexpectedly crashing, I was not able to get all my sprites in time. The ones I have right now are from:
+-spritedatabase.net/file/5518/Route_102
+-https://orig00.deviantart.net/036d/f/2011/148/4/9/lil___bud_sprites_by_the_koopa_of_troopa-d3hg3bp.png
+-https://i.pinimg.com/originals/df/0f/ab/df0fab6b20c12687f61d17a54c06e335.png
+
+The easiest part of this project: Implimenting the player was pretty easy.
+
+Problems that I had in completing this project: My VM stopped working the night the project was due as I was touching things up so I had to redo everything the night before. I am going to spend Thanksgiving break to make everything more unique and robust.
