@@ -6,7 +6,6 @@
 #include "world.h"
 #include "viewport.h"
 #include "player.h"
-#include "smartSprite.h"
 #include "hud.h"
 #include "sound.h"
 
@@ -33,7 +32,7 @@ private:
   CollisionStrategy *strategy;
   bool collision;
 
-  std::vector<SmartSprite*> sprites;
+  std::vector<Sprite*> sprites;
   int currentSprite;
 
   bool makeVideo;

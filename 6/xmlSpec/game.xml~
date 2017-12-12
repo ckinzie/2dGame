@@ -11,7 +11,7 @@
 <maxFrames>300</maxFrames>
 <username>ckinzie</username>
 
-<numberOfStars>25</numberOfStars>
+<numberOfStars>50</numberOfStars>
 
 <view>
   <width>854</width>
@@ -43,12 +43,37 @@
   <height>150</height>
 </HUD>
 
+<Bee>
+  <file>assets/bee.png</file>
+  <startLoc x="1000" y="1000"/>
+  <speedX>150</speedX>
+  <speedY>150</speedY>
+  <safeDistance>75</safeDistance>
+  <transparency>false</transparency>
+  <chunk>
+    <size>9</size>
+    <distance>100</distance>
+  </chunk>
+</Bee>
+<BeeL>
+  <file>assets/beeL.png</file>
+  <startLoc x="1000" y="1000"/>
+  <speedX>150</speedX>
+  <speedY>150</speedY>
+  <safeDistance>75</safeDistance>
+  <transparency>false</transparency>
+  <chunk>
+    <size>9</size>
+    <distance>100</distance>
+  </chunk>
+</BeeL>
+
 <Pirate>
   <file>assets/pirateU.png</file>
   <startLoc x="50" y="140"/>
   <frames>4</frames>
-  <imageWidth>30</imageWidth>
-  <imageHeight>32</imageHeight>
+  <imageWidth>60</imageWidth>
+  <imageHeight>64</imageHeight>
   <frameInterval>200</frameInterval>
   <speedX>200</speedX>
   <speedY>200</speedY>
@@ -63,8 +88,8 @@
   <file>assets/pirateD.png</file>
   <startLoc x="50" y="140"/>
   <frames>4</frames>
-  <imageWidth>30</imageWidth>
-  <imageHeight>32</imageHeight>
+  <imageWidth>60</imageWidth>
+  <imageHeight>64</imageHeight>
   <frameInterval>200</frameInterval>
   <speedX>200</speedX>
   <speedY>200</speedY>
@@ -79,8 +104,8 @@
   <file>assets/pirateR.png</file>
   <startLoc x="50" y="140"/>
   <frames>4</frames>
-  <imageWidth>30</imageWidth>
-  <imageHeight>32</imageHeight>
+  <imageWidth>60</imageWidth>
+  <imageHeight>64</imageHeight>
   <frameInterval>200</frameInterval>
   <speedX>200</speedX>
   <speedY>200</speedY>
@@ -95,8 +120,8 @@
   <file>assets/pirateL.png</file>
   <startLoc x="50" y="140"/>
   <frames>4</frames>
-  <imageWidth>30</imageWidth>
-  <imageHeight>32</imageHeight>
+  <imageWidth>60</imageWidth>
+  <imageHeight>64</imageHeight>>
   <frameInterval>200</frameInterval>
   <speedX>200</speedX>
   <speedY>200</speedY>
@@ -109,8 +134,8 @@
 
 <Star>
   <file>assets/star.png</file>
-  <startLoc x="200" y="200"/>
-  <speedX>100</speedX>
+  <startLoc x="1000" y="1000"/>
+  <speedX>150</speedX>
   <speedY>150</speedY>
   <safeDistance>75</safeDistance>
   <transparency>false</transparency>

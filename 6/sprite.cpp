@@ -40,9 +40,27 @@ Sprite::Sprite(const std::string& name) :
   worldHeight(Gamedata::getInstance().getXmlInt("world/height"))
 { }
 
+Sprite::Sprite(const std::string& name, bool bd) :
+  Drawable(name,
+           Vector2f(Gamedata::getInstance().getXmlInt(name+"/startLoc/x")+ rand()%500, 
+                    Gamedata::getInstance().getXmlInt(name+"/startLoc/y")+ rand()%500),
+           makeVelocity(
+                    Gamedata::getInstance().getXmlInt(name+"/speedX"), 
+                    Gamedata::getInstance().getXmlInt(name+"/speedY")) 
+           ),
+  image( RenderContext::getInstance()->getImage(name) ),
+  imageL( RenderContext::getInstance()->getImage(name + "L") ),
+  bidirectional(bd),
+  explosion(nullptr),
+  worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
+  worldHeight(Gamedata::getInstance().getXmlInt("world/height"))
+{ }
+
+
 Sprite::Sprite(const Sprite& s) :
   Drawable(s), 
   image(s.image),
+  imageL(s.imageL),
   explosion(s.explosion),
   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
   worldHeight(Gamedata::getInstance().getXmlInt("world/height"))
@@ -68,10 +86,15 @@ void Sprite::explode() {
 
 void Sprite::draw() const { 
   if(getScale() < SCALE_EPSILON) return;
-  if(explosion)
+  if(explosion) {
     explosion->draw();
-  else 
-    image->draw(getX(), getY(), getScale()); 
+  }
+  else if (!bidirectional || facingRight) {
+    image->draw(getX(), getY(), getScale());
+  } 
+  else {
+    imageL->draw(getX(), getY(), getScale());
+  }
 }
 
 void Sprite::update(Uint32 ticks) { 
@@ -95,8 +118,10 @@ void Sprite::update(Uint32 ticks) {
 
   if ( getX() < 0) {
     setVelocityX( std::abs( getVelocityX() ) );
+    facingRight = true;
   }
   if ( getX() > worldWidth-getScaledWidth()) {
     setVelocityX( -std::abs( getVelocityX() ) );
+    facingRight = false;
   }  
 }

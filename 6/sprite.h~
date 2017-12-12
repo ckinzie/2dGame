@@ -29,9 +29,7 @@ public:
 
 private:
   const Image * image;
-  const Image * imageL;
   bool bidirectional = false;
-  bool facingRight = false;
   ExplodingSprite* explosion;
 
 protected:
