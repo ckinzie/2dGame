@@ -85,7 +85,7 @@ void Engine::draw() const {
       break;
     case 5:
       gold->draw();
-      IOmod::getInstance().writeText("YOU WIN! Press R to restart", 230, 180, {0,255,255,255});
+      IOmod::getInstance().writeText("YOU WIN! Press R to restart", 230, 180, {255,255,0,255});
       clock.pause();
       break;
   }
@@ -141,6 +141,7 @@ void Engine::checkForCollisions() {
     case 4:
       if ( strategy->execute(*player, *chest)) {
         gold->setPosition(player->getPosition());
+        sound[1];
         stage++;
       }
       break;
@@ -149,6 +150,7 @@ void Engine::checkForCollisions() {
   for ( Sprite* s : sprites ) {
     if ( player->getBulletPool().collided(s) ) {
       enemyCount--;
+      sound[0];
       if(enemyCount == 0)
         key->setPosition(s->getPosition());
       s->explode();

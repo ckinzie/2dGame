@@ -37,6 +37,9 @@ SDLSound::SDLSound() :
 
   startMusic();
 
+  sounds.push_back (Mix_LoadWAV("sound/squish.wav"));
+  sounds.push_back (Mix_LoadWAV("sound/victory.wav"));
+
   for (unsigned int i = 0; i < sounds.size(); ++i) channels.push_back(i);
   std::cout << "Music and Sound is loaded" << std::endl;
 }
