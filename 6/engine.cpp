@@ -38,15 +38,17 @@ Engine::Engine() :
   makeVideo( false )
 {
   hud = new Hud(renderer, Gamedata::getInstance().getXmlInt("HUD/width"),Gamedata::getInstance().getXmlInt("HUD/height"), player);
-  int n = Gamedata::getInstance().getXmlInt("numberOfStars");
+  int n = Gamedata::getInstance().getXmlInt("numberOfWasps");
   sprites.reserve(n);
-  //Vector2f pos = player->getPosition();
-  //int w = player->getScaledWidth();
-  //int h = player->getScaledHeight();
   for (int i = 0; i < n; ++i) {
     sprites.push_back( new Sprite("Bee", true) );
+    enemyCount++;
   }
-
+  x = new Sprite("X");
+  chest = new Sprite("Chest");
+  shovel = new Sprite("Shovel");
+  key = new Sprite("Key");
+  gold = new Sprite("Gold");
   strategy = new PerPixelCollisionStrategy;
   Viewport::getInstance().setObjectToTrack(player);
   std::cout << "Loading complete" << std::endl;
@@ -55,14 +57,50 @@ Engine::Engine() :
 void Engine::draw() const {
   background.draw();
 
+  switch(stage) {
+    case 0:
+      x->draw();
+      IOmod::getInstance().writeText("QUEST: Find the RED X", 10, 440, {0,0,0,255});
+      break;
+    case 1:
+      x->draw();
+      shovel->draw();
+      IOmod::getInstance().writeText("QUEST: Find the SHOVEL", 10, 440, {0,0,0,255});
+      break;
+    case 2:
+      x->draw();
+      IOmod::getInstance().writeText("QUEST: Dig at the RED X", 10, 440, {0,0,0,255});
+      break;
+    case 3:
+      chest->draw();
+      if(enemyCount == 0) {
+        key->draw();
+      }
+      IOmod::getInstance().writeText("QUEST: One of the wasps must have taken the key.", 10, 420, {0,0,0,255});
+      IOmod::getInstance().writeText("               Kill them all to find it!", 10, 440, {0,0,0,255});
+      break;
+    case 4:
+      chest->draw();
+      IOmod::getInstance().writeText("QUEST: Unlock the CHEST", 10, 440, {0,0,0,255});
+      break;
+    case 5:
+      gold->draw();
+      IOmod::getInstance().writeText("YOU WIN! Press R to restart", 230, 180, {0,255,255,255});
+      clock.pause();
+      break;
+  }
+  
   for (auto x : sprites)
     x->draw();
-  player->draw();
+  if (player->dead) {
+    IOmod::getInstance().writeText("Uh-Oh! You died. Press R to try again!", 230, 220, {0,0,0,255});
+    clock.pause();
+  }
+  else
+    player->draw();
   hud->draw();
 
   strategy->draw();
-
-  io.writeText("Connor Kinzie", 30, 400, {255,255,0,0});
 
   viewport.draw();
   SDL_RenderPresent(renderer);
@@ -83,8 +121,36 @@ void Engine::checkForCollisions() {
     collision = false;
   }
 
+  switch(stage) {
+    case 0:
+      if ( strategy->execute(*player, *x))
+        stage++;
+      break;
+    case 1:
+      if ( strategy->execute(*player, *shovel))
+        stage++;
+      break;
+    case 2:
+      if ( strategy->execute(*player, *x))
+        stage++;
+      break;
+    case 3:
+      if ( strategy->execute(*player, *key) && enemyCount == 0)
+        stage++;
+      break;
+    case 4:
+      if ( strategy->execute(*player, *chest)) {
+        gold->setPosition(player->getPosition());
+        stage++;
+      }
+      break;
+  }
+
   for ( Sprite* s : sprites ) {
     if ( player->getBulletPool().collided(s) ) {
+      enemyCount--;
+      if(enemyCount == 0)
+        key->setPosition(s->getPosition());
       s->explode();
     }
   }
@@ -99,7 +165,7 @@ void Engine::update(Uint32 ticks) {
   viewport.update(); // always update viewport last
 }
 
-void Engine::play() {
+bool Engine::play() {
   bool flag = true;
   SDL_Event event;
   const Uint8* keystate;
@@ -128,6 +194,10 @@ void Engine::play() {
         }
         if ( keystate[SDL_SCANCODE_M] ) {
           sound.toggleMusic();
+        }
+        if ( keystate[SDL_SCANCODE_R] ) {
+          clock.unpause();
+          return true;
         }
         if ( keystate[SDL_SCANCODE_G] ) {
           player->toggleGod();
@@ -210,4 +280,5 @@ void Engine::play() {
       }
     }
   }
+  return false;
 }

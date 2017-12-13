@@ -100,6 +100,7 @@ void MultiSprite2d::update(Uint32 ticks) {
     if ( explosion->chunkCount() == 0 ) {
       delete explosion;
       explosion = NULL;
+      dead = true;
     }
     return;
   }

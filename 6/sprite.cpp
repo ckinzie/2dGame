@@ -28,8 +28,8 @@ Sprite::Sprite(const string& n, const Vector2f& pos, const Vector2f& vel,
 
 Sprite::Sprite(const std::string& name) :
   Drawable(name,
-           Vector2f(Gamedata::getInstance().getXmlInt(name+"/startLoc/x")+ rand()%500, 
-                    Gamedata::getInstance().getXmlInt(name+"/startLoc/y")+ rand()%500),
+           Vector2f(Gamedata::getInstance().getXmlInt(name+"/startLoc/x"), 
+                    Gamedata::getInstance().getXmlInt(name+"/startLoc/y")),
            makeVelocity(
                     Gamedata::getInstance().getXmlInt(name+"/speedX"), 
                     Gamedata::getInstance().getXmlInt(name+"/speedY")) 
@@ -42,11 +42,11 @@ Sprite::Sprite(const std::string& name) :
 
 Sprite::Sprite(const std::string& name, bool bd) :
   Drawable(name,
-           Vector2f(Gamedata::getInstance().getXmlInt(name+"/startLoc/x")+ rand()%500, 
-                    Gamedata::getInstance().getXmlInt(name+"/startLoc/y")+ rand()%500),
+           Vector2f(Gamedata::getInstance().getXmlInt(name+"/startLoc/x")- rand()%1500, 
+                    Gamedata::getInstance().getXmlInt(name+"/startLoc/y")- rand()%1499),
            makeVelocity(
-                    Gamedata::getInstance().getXmlInt(name+"/speedX"), 
-                    Gamedata::getInstance().getXmlInt(name+"/speedY")) 
+                    Gamedata::getInstance().getXmlInt(name+"/speedX")+ rand()%50, 
+                    Gamedata::getInstance().getXmlInt(name+"/speedY")+ rand()%49) 
            ),
   image( RenderContext::getInstance()->getImage(name) ),
   imageL( RenderContext::getInstance()->getImage(name + "L") ),
@@ -84,9 +84,18 @@ void Sprite::explode() {
 	explosion = new ExplodingSprite(*this);
 }
 
+bool Sprite::explosionDone() const{
+  if (explosion && explosion->chunkCount() == 0)
+    return true;
+  return false;
+}
+
 void Sprite::draw() const { 
   if(getScale() < SCALE_EPSILON) return;
-  if(explosion) {
+  
+  if (explosionDone())
+    return;
+  else if(explosion) {
     explosion->draw();
   }
   else if (!bidirectional || facingRight) {
@@ -100,14 +109,19 @@ void Sprite::draw() const {
 void Sprite::update(Uint32 ticks) { 
   if ( explosion ) {
     explosion->update(ticks);
-    if ( explosion->chunkCount() == 0 ) {
-      delete explosion;
-      explosion = NULL;
+    setPosition(Vector2f(-1,-1));
+    if ( explosionDone() ) {
+      return;
     }
     return;
   }
   Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
   setPosition(getPosition() + incr);
+
+  if(getVelocity()[0] > 0)
+    facingRight = true;
+  else
+    facingRight = false;
 
   if ( getY() < 0) {
     setVelocityY( std::abs( getVelocityY() ) );
@@ -118,10 +132,8 @@ void Sprite::update(Uint32 ticks) {
 
   if ( getX() < 0) {
     setVelocityX( std::abs( getVelocityX() ) );
-    facingRight = true;
   }
   if ( getX() > worldWidth-getScaledWidth()) {
     setVelocityX( -std::abs( getVelocityX() ) );
-    facingRight = false;
   }  
 }

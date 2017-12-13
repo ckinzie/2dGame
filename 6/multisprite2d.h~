@@ -47,7 +47,7 @@ protected:
   int worldWidth;
   int worldHeight;
   bool facingRight;
-  int dir;
+  int dir = 2;
 
   void advanceFrame(Uint32 ticks);
   MultiSprite2d& operator=(const MultiSprite2d&);

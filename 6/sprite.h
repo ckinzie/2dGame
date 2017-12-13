@@ -26,6 +26,7 @@ public:
   int getScaledHeight() const { return getScale()*image->getHeight(); } 
 
   virtual void explode();
+  bool explosionDone() const;
 
 private:
   const Image * image;

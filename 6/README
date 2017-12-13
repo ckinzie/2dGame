@@ -8,12 +8,16 @@ Project no: 6
 
 Project due date: December 13th, 2017
 
-Project description: 
+Project description: The goal of Treasure Hunt is to take back the buried treasure from the wasps. WASD moves your character while the arrow keys are used for shooting. F1 opens the HUD. Press G for god mode and M to mute the music.
 
+The sprites I used are:
 https://opengameart.org/content/pirate-1
+https://lycheeonthetree.deviantart.com/art/Pixel-Dailies-bee-585365644
 https://opengameart.org/content/chest-and-key
 https://opengameart.org/content/pixel-hammer-and-shovel
+https://opengameart.org/content/gold-treasure-icons
+https://www.pinterest.com.au/pin/335799715951531183/
 
-The easiest part of this project: 
+The easiest part of this project: The quest part of the story was actually way simpler than I thought it would be.
 
-Problems that I had in completing this project: 
+Problems that I had in completing this project: I had a lot of trouble finding sprites I liked, but that's a personal problem. Getting the wasps to disappear was another issue I had. They would explode, but technically still be there drawn, so I would run into them and die. I had to find a way to get rid of them.

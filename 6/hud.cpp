@@ -12,15 +12,15 @@ void Hud::draw() const {
     SDL_SetRenderDrawColor( renderer, 255, 0, 0, 150 );
     SDL_RenderFillRect( renderer, &r );
     IOmod::getInstance().writeText("HUD:", 10, 10, {255,255,255,255});
-    IOmod::getInstance().writeText("Use wasd to ", 10, 50, {255,255,255,255});
-    IOmod::getInstance().writeText("move the goomba.", 10,70, {255,255,255,255});
-    IOmod::getInstance().writeText("E explodes player.", 10,90, {255,255,255,255});
+    IOmod::getInstance().writeText("Use WASD to move the player.", 10, 50, {255,255,255,255});
+    IOmod::getInstance().writeText("Use arrow keys to shoot.", 10,70, {255,255,255,255});
+    IOmod::getInstance().writeText("G for god mode, M to mute.", 10,90, {255,255,255,255});
     std::ostringstream ss;
     ss << "Bullet list: " << player->bulletCount();
-    IOmod::getInstance().writeText(ss.str(), 10,110, {255,255,255,255});
+    /*IOmod::getInstance().writeText(ss.str(), 10,110, {255,255,255,255});
     std::ostringstream ss2;
     ss2 << "Free list: " << player->freeCount();
-    IOmod::getInstance().writeText(ss2.str(), 10,130, {255,255,255,255});
+    IOmod::getInstance().writeText(ss2.str(), 10,130, {255,255,255,255});*/
   }
 }
 

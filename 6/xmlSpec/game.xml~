@@ -2,7 +2,7 @@
 <GameData>
 <!-- screenTitle is also used to identify you and your animation. 
      So make sure to include your name as part of the screenTitle -->
-<title>The Tracker Framework</title>
+<title>Treasure Hunt</title>
 <maxStringSize>50</maxStringSize>
 
 <frameCapOn>true</frameCapOn>
@@ -11,7 +11,7 @@
 <maxFrames>300</maxFrames>
 <username>ckinzie</username>
 
-<numberOfStars>50</numberOfStars>
+<numberOfWasps>1</numberOfWasps>
 
 <view>
   <width>854</width>
@@ -39,15 +39,56 @@
 </font>
 
 <HUD>
-  <width>220</width>
-  <height>150</height>
+  <width>350</width>
+  <height>130</height>
 </HUD>
+
+<Gold>
+  <file>assets/gold.png</file>
+  <startLoc x="1550" y="1750"/>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+
+</Gold>
+
+<X>
+  <file>assets/x.png</file>
+  <startLoc x="1600" y="1750"/>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</X>
+
+<Shovel>
+  <file>assets/shovel.png</file>
+  <startLoc x="200" y="200"/>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</Shovel>
+
+<Key>
+  <file>assets/key.png</file>
+  <startLoc x="1400" y="575"/>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</Key>
+
+<Chest>
+  <file>assets/chest.png</file>
+  <startLoc x="1600" y="1750"/>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</Chest>
 
 <Bee>
   <file>assets/bee.png</file>
-  <startLoc x="1000" y="1000"/>
-  <speedX>150</speedX>
-  <speedY>150</speedY>
+  <startLoc x="1800" y="1800"/>
+  <speedX>130</speedX>
+  <speedY>130</speedY>
   <safeDistance>75</safeDistance>
   <transparency>false</transparency>
   <chunk>
@@ -57,9 +98,9 @@
 </Bee>
 <BeeL>
   <file>assets/beeL.png</file>
-  <startLoc x="1000" y="1000"/>
-  <speedX>150</speedX>
-  <speedY>150</speedY>
+  <startLoc x="1800" y="1800"/>
+  <speedX>130</speedX>
+  <speedY>130</speedY>
   <safeDistance>75</safeDistance>
   <transparency>false</transparency>
   <chunk>
@@ -153,9 +194,9 @@
   <frameInterval>1</frameInterval>
   <speedX>0</speedX>
   <speedY>0</speedY>
-  <minSpeed>300</minSpeed>
-  <distance>300</distance>
-  <bulletInterval>400</bulletInterval>
+  <minSpeed>350</minSpeed>
+  <distance>350</distance>
+  <bulletInterval>450</bulletInterval>
   <transparency>true</transparency>
 </Bullet>
 

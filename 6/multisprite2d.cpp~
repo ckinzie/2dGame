@@ -83,11 +83,11 @@ void MultiSprite2d::explode() {
 void MultiSprite2d::draw() const { 
   if ( explosion ) explosion->draw();
   else {
-    if (facingRight)
+    if (dir == 0)
       images[currentFrame]->draw(getX(), getY(), getScale());
-    else if (facingRight)
+    else if (dir == 1)
       imagesR[currentFrame]->draw(getX(), getY(), getScale());
-    else if (facingRight)
+    else if (dir == 3)
       imagesL[currentFrame]->draw(getX(), getY(), getScale());
     else
       imagesD[currentFrame]->draw(getX(), getY(), getScale());

@@ -26,11 +26,15 @@ public:
   int getScaledHeight() const { return getScale()*image->getHeight(); } 
 
   virtual void explode();
+  bool explosionDone() const;
 
 private:
   const Image * image;
+  const Image * imageL;
   bool bidirectional = false;
+  bool facingRight = false;
   ExplodingSprite* explosion;
+  int stage = 0;
 
 protected:
   int worldWidth;

@@ -33,6 +33,8 @@ public:
 
   virtual void explode();
 
+  bool dead = false;
+
 protected:
   std::vector<Image *> images;
   std::vector<Image *> imagesR;
